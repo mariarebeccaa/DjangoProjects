@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtrează Produse</title>
+</head>
+<body>
+    <h1>Filtrează Produse</h1>
+
+    <!-- Formular pentru filtre -->
+    <form method="get">
+        {{ form.as_p }} <!--aplica widget utile personalizate-->
+        <button type="submit">Filtrează</button>
+    </form>
+
+    <!-- Lista produselor -->
+    <h2>Rezultate:</h2>
+    <ul>
+        {% for produs in produse %}
+        <li>
+            <strong>{{ produs.nume }}</strong> - {{ produs.pret }} RON<br>
+            Descriere: {{ produs.descriere }}<br>
+            Marca: 
+            {% for marca in produs.marci.all %}
+                {{ marca.nume }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}<br>
+            Categorie: {{ produs.categorie.nume }}<br>
+        </li>
+        {% empty %}
+            <li>Nu s-au găsit produse.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

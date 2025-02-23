@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista Elevi</title>
+</head>
+<body>
+    <h1>Lista Elevi</h1>
+    <ul>
+        {% for elev in elevi %}
+        <li>
+            <a href="{% url 'detalii_elev' elev.id %}">{{ elev.nume }} {{ elev.prenume }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

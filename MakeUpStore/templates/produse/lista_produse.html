@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Produse</title>
+</head>
+<body>
+    <h1>Lista Produse</h1>
+    <form method="get"> <!--generează un formular HTML care trimite parametrii de filtrare prin URL folosind metoda GET.-->
+        <input type="text" name="nume" placeholder="Nume produs" value="{{ request.GET.nume }}">
+        <input type="number" name="pret_min" placeholder="Preț minim" value="{{ request.GET.pret_min }}">
+        <input type="number" name="pret_max" placeholder="Preț maxim" value="{{ request.GET.pret_max }}">
+        <input type="text" name="descriere" placeholder="Descriere" value="{{ request.GET.descriere }}">
+        <input type="text" name="marca" placeholder="Marcă" value="{{ request.GET.marca }}">
+        <input type="text" name="categorie" placeholder="Categorie" value="{{ request.GET.categorie }}">
+        <button type="submit">Filtrează</button>
+    </form>
+
+    <ul>
+        {% for produs in produse %}
+            <li>
+                <strong>{{ produs.nume }}</strong><br>
+                Preț: {{ produs.pret }}<br>
+                Descriere: {{ produs.descriere }}<br>
+                Marcă: {% for marca in produs.marci.all %}{{ marca.nume }}{% if not forloop.last %}, {% endif %}{% endfor %}<br>
+                Categorie: {{ produs.categorie.nume }}
+            </li>
+        {% empty %}
+            <li>Niciun produs găsit.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Paginare -->
+    <div>
+        <span>Pagina {{ produse.number }} din {{ produse.paginator.num_pages }}</span>
+        <div>
+            {% if produse.has_previous %}
+                <a href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ produse.previous_page_number }}">Pagina anterioară</a>
+                <!--Creeaza un link catre pagina anterioara, folosind request.GET.items pt a psatra filtrele deja aplicate-->  
+            {% endif %}
+            {% if produse.has_next %}
+                <a href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ produse.next_page_number }}">Pagina următoare</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

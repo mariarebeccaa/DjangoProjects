@@ -1,0 +1,34 @@
+<!-- filepath: /c:/Users/asus/OneDrive/Documente/FacultateDjango/MakeUpStore/templates/promotii/creeaza_promotie.html -->
+{% comment %} {% load static %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creează Promoție</title>
+</head>
+<body>
+    <h1>Creează Promoție</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div>
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+            <p>{{ field.help_text }}</p>
+            {% endif %}
+            {% if field.errors %}
+            <div>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div>
+            <button type="submit">Creează Promoție</button>
+            <a href="{% url 'lista_promotii' %}">Înapoi la Lista Promoții</a>
+        </div>
+    </form>
+</body>
+</html>

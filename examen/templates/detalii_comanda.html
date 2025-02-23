@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalii Comanda</title>
+</head>
+<body>
+    <h1>Detalii Comanda</h1>
+    <p>Nume: {{ client.nume }}</p>
+    <p>Prenume: {{ client.prenume }}</p>
+    <h2>Comenzi</h2>
+    <ul>
+        {% for comanda in comenzi %}
+        <li>{{ comanda.produs }} - {{ comanda.pret }} RON</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'lista_clienti' %}">Inapoi la Lista Clienti</a>
+</body>
+</html>

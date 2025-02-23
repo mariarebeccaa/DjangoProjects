@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adauga Comanda</title>
+</head>
+<body>
+    <h1>Adauga Comanda</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Adauga Comanda</button>
+    </form>
+    <a href="{% url 'lista_clienti' %}">Inapoi la Lista Clienti</a>
+</body>
+</html>

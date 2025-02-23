@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adaugă Elev</title>
+</head>
+<body>
+    <h1>Adaugă Elev</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Adaugă Elev</button>
+    </form>
+    <a href="{% url 'lista_elevi' %}">Înapoi la Lista Elevi</a>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Mesaje</title>
+</head>
+<body>
+    <h1>Lista Mesaje</h1>
+
+    <!-- Formular de filtrare -->
+    <form method="get">
+        <label for="tip_mesaj">Tip mesaj:</label>
+        <select name="tip_mesaj" id="tip_mesaj">
+            <option value="">Toate</option>
+            <option value="reclamatie" {% if tip_mesaj == "reclamatie" %}selected{% endif %}>Reclamație</option>
+            <option value="intrebare" {% if tip_mesaj == "intrebare" %}selected{% endif %}>Întrebare</option>
+            <option value="review" {% if tip_mesaj == "review" %}selected{% endif %}>Review</option>
+            <option value="cerere" {% if tip_mesaj == "cerere" %}selected{% endif %}>Cerere</option>
+            <option value="programare" {% if tip_mesaj == "programare" %}selected{% endif %}>Programare</option>
+        </select>
+
+        <label for="nume">Nume:</label>
+        <input type="text" id="nume" name="nume" value="{{ nume }}" placeholder="Caută după nume">
+
+        <button type="submit">Filtrează</button>
+    </form>
+
+    <!-- Lista mesajelor -->
+    <ul>
+        {% for mesaj in mesaje %}
+            <li>
+                <strong>Nume:</strong> {{ mesaj.nume }}<br>
+                <strong>Prenume:</strong> {{ mesaj.prenume }}<br>
+                <strong>Vârstă:</strong> {{ mesaj.varsta }}<br>
+                <strong>E-mail:</strong> {{ mesaj.email }}<br>
+                <strong>Tip mesaj:</strong> {{ mesaj.tip_mesaj }}<br>
+                <strong>Subiect:</strong> {{ mesaj.subiect }}<br>
+                <strong>Minim zile așteptare:</strong> {{ mesaj.minim_zile_asteptare }}<br>
+                <strong>Mesaj:</strong> {{ mesaj.mesaj }}<br>
+            </li>
+        {% empty %}
+            <li>Nu există mesaje care să corespundă criteriilor de căutare.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
